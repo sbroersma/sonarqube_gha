@@ -1,0 +1,62 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: sonar-properties
+  title: Sonarqube project properties
+  description: sonar.properties file for Sonarqube project
+spec:
+  owner: sbroersma
+  type: service
+
+  parameters:
+    - title: User input
+      required:
+        - sonarqube_key
+        - repoUrl
+      properties:
+        sonarqube_key:
+          title: Sonarqube project key
+          type: string
+          description: Unique Sonarqube project key
+        repoUrl:
+          title: Target Repository
+          type: string
+          description: Repositor to upload to
+          ui:field: RepoUrlPicker
+          ui:options:
+            allowedHosts:
+              - github.com
+        branchName:
+          title: Branch name
+          type: string
+          description: Name of branch to create for pull request
+        description:
+          title: Description of pull request
+          type: string
+
+  steps:
+    - id: create_file
+      name: Create Sonarqube project file
+      action: catalog:write
+      input:
+        filePath: ./sonar-project.properties
+        entity: 
+          sonar.projectKey: ${{ parameters.sonarqube_key }}   
+
+    - id: publish
+      name: Publish
+      action: publish:github:pull-request
+      input:
+        repoUrl: ${{ parameters.repoUrl }}
+        title: ${{parameters.branchName}}
+        branchName: create-${{parameters.branchName}}
+        description: |
+          # New project: ${{parameters.name}}
+          ${{ parameters.description if parameters.description }}
+        sourcePath: ./
+        targetPath: ${{ parameters.targetPath if parameters.targetPath else parameters.name }}
+
+  output:
+    links:
+      - url: ${{steps.publish.output.remoteUrl}}
+        text: "Go to Pull Request"
