@@ -1,0 +1,82 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: sonarqube-github-action
+  title: Sonarqube GitHub Action
+  description: Creates Sonarqube Scan via GitHub Action
+spec:
+  owner: sbroersma
+  type: service
+
+  parameters:
+    - title: Sonarqube GitHub Action inputs
+      required:
+        - targetPath
+        - repoUrl
+      properties:
+        repoUrl:
+            title: Repository Location
+            type: string
+            ui:field: RepoUrlPicker
+            ui:options:
+              allowedHosts:
+                - github.com
+      #  branchName:
+      #    title: Branch Name
+      #    type: string
+      #    description: Name of branch to create
+      #    ui:field: EntityNamePicker
+      #    ui:autofocus: true
+      #  description:
+      #    title: Description
+      #    type: string
+      #    description: Description of the pull request
+      #  targetPath:
+      #    title: Target Path in repo
+      #    type: string
+      #    description: Name of the directory to create in the repository
+    #- title: Choose a location
+    #  required:
+    #    - repoUrl
+    #  properties:
+    #    repoUrl:
+    #      title: Repository Location
+    #      type: string
+    #      ui:field: RepoUrlPicker
+    #      ui:options:
+    #        allowedHosts:
+    #          - github.com
+
+  steps:
+    #- id: fetch-base
+    #  name: Fetch Base
+    #  action: fetch:template
+    #  input:
+    #    url: ./template
+    #    values:
+    #      name: "Sonarqube_Scan_Workflow" #${{parameters.branchName}}
+
+    - id: fetch-docs
+      name: Fetch Docs
+      action: fetch:plain
+      input:
+        targetPath: ./
+        url: https://github.com/sbroersma/sonarqube_gha/tree/main/sonarqube_workflow
+        # url: https://github.com/sbroersma/hello_world_template/tree/main/actions
+
+    - id: publish
+      name: Publish
+      action: publish:github:pull-request
+      input:
+        repoUrl: ${{ parameters.repoUrl }}
+        title: "Sonarqube_Scan_Workflow" #"${{parameters.branchName}}"
+        branchName: "Sonarqube_Scan_Workflow" #create-${{parameters.branchName}}
+        description: |
+          # New project: ${{parameters.branchName}}
+          "Create files to create GitHub Action for Sonarqube Scan" #${{ parameters.description if parameters.description }}
+        targetPath: ./.github/workflows/ #${{ parameters.targetPath if parameters.targetPath else parameters.branchName }}
+
+  output:
+    links:
+      - url: ${{steps.publish.output.remoteUrl}}
+        text: "Go to PR"
