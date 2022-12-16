@@ -11,59 +11,24 @@ spec:
   parameters:
     - title: Sonarqube GitHub Action inputs
       required:
-        #- targetPath
         - repoUrl
       properties:
         repoUrl:
-            title: Repository Location
+            title: Target Repository Location
             type: string
             ui:field: RepoUrlPicker
             ui:options:
               allowedHosts:
                 - github.com
-      #  branchName:
-      #    title: Branch Name
-      #    type: string
-      #    description: Name of branch to create
-      #    ui:field: EntityNamePicker
-      #    ui:autofocus: true
-      #  description:
-      #    title: Description
-      #    type: string
-      #    description: Description of the pull request
-      #  targetPath:
-      #    title: Target Path in repo
-      #    type: string
-      #    description: Name of the directory to create in the repository
-    #- title: Choose a location
-    #  required:
-    #    - repoUrl
-    #  properties:
-    #    repoUrl:
-    #      title: Repository Location
-    #      type: string
-    #      ui:field: RepoUrlPicker
-    #      ui:options:
-    #        allowedHosts:
-    #          - github.com
-
+      
   steps:
-    #- id: fetch-base
-    #  name: Fetch Base
-    #  action: fetch:template
-    #  input:
-    #    url: ./template
-    #    values:
-    #      name: "Sonarqube_Scan_Workflow" #${{parameters.branchName}}
-
     - id: fetch-docs
       name: Fetch Docs
       action: fetch:plain
       input:
         targetPath: ./
         url: https://github.com/sbroersma/sonarqube_gha/tree/main/sonarqube_workflow
-        # url: https://github.com/sbroersma/hello_world_template/tree/main/actions
-
+        
     - id: publish
       name: Publish
       action: publish:github:pull-request
