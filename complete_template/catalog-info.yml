@@ -62,7 +62,7 @@ spec:
         title: "Sonarqube project property file"
         branchName: "Sonarqube_project_properties"
         description: "Create sonar project properties file"
-        sourcePath: ./
+        sourcePath: ./sonar-project.properties
         targetPath: ./
 
 
