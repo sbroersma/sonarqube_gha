@@ -27,12 +27,12 @@ spec:
                 - github.com
       
   steps:
-    - id: fetch-docs
-      name: Fetch Docs
-      action: fetch:plain
-      input:
-        targetPath: ./
-        url: https://github.com/sbroersma/sonarqube_gha/tree/main/sonarqube_workflow
+    #- id: fetch-docs
+    #  name: Fetch Docs
+    ##  action: fetch:plain
+     # input:
+     #   targetPath: ./
+     #   url: https://github.com/sbroersma/sonarqube_gha/tree/main/sonarqube_workflow
         
     - id: publish_sonar_gha
       name: Publish Sonarqube GitHub Action
