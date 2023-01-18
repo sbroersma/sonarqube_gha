@@ -1,9 +1,9 @@
 apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
-  name: node-complete-sonarqube-github-action
-  title: Node Complete Sonarqube GitHub Action
-  description: Creates Node.js Sonarqube Scan via GitHub Action
+  name: sonarqube-github-action
+  title: Sonarqube GitHub Action
+  description: Creates Sonarqube Scan via GitHub Action
 spec:
   owner: sbroersma
   type: service
