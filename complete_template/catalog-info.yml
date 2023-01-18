@@ -31,7 +31,7 @@ spec:
       name: Fetch Docs
       action: fetch:plain
       input:
-        targetPath: ./sq_workflow
+        targetPath: ./
         url: https://github.com/sbroersma/sonarqube_gha/tree/main/sonarqube_workflow
         
     - id: publish_sonar_gha
@@ -50,7 +50,7 @@ spec:
       name: Create Sonarqube project properties file
       action: catalog:write
       input:
-        filePath: ./sq_workflow/sonarqube_workflow.yml #./sonar-project.properties
+        filePath: ./sonar-project.properties
         entity:
           sonar.projectKey: ${{ parameters.sonarqubeKey }}
     
@@ -62,7 +62,7 @@ spec:
         title: "Sonarqube project property file"
         branchName: "Sonarqube_project_properties"
         description: "Create sonar project properties file"
-        sourcePath: ./sq_workflow/
+        sourcePath: ./
         targetPath: ./
 
 
