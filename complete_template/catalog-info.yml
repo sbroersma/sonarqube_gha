@@ -31,7 +31,7 @@ spec:
       name: Fetch Docs
       action: fetch:plain
       input:
-        targetPath: ./sq_workkflow
+        targetPath: ./sq_workflow
         url: https://github.com/sbroersma/sonarqube_gha/tree/main/sonarqube_workflow
         
     - id: publish_sonar_gha
