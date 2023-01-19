@@ -31,7 +31,7 @@ spec:
       name: Fetch Docs
       action: fetch:plain
       input:
-        targetPath: ./sq_workflow
+        targetPath: ./
         url: https://github.com/sbroersma/sonarqube_gha/tree/main/sonarqube_workflow
         
     - id: publish_sonar_gha
@@ -44,7 +44,7 @@ spec:
         description: |
           # New project: ${{parameters.branchName}}
           "Create files to create GitHub Action for Sonarqube Scan" #${{ parameters.description if parameters.description }}
-        sourcePath: ./sq_workflow
+        sourcePath: ./
         targetPath: ./.github/workflows/ #${{ parameters.targetPath if parameters.targetPath else parameters.branchName }}
 
     - id: create_file
@@ -63,7 +63,7 @@ spec:
         title: "Sonarqube project property file"
         branchName: "Sonarqube_project_properties"
         description: "Create sonar project properties file"
-        sourcePath: ./sonar-project.properties
+        sourcePath: ./
         targetPath: ./
 
 
