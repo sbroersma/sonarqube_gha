@@ -51,7 +51,7 @@ spec:
       name: Create Sonarqube project properties file
       action: catalog:write
       input:
-        filePath: ./sonar-project.properties
+        filePath: ./test/sonar-project.properties
         entity:
           sonar.projectKey: ${{ parameters.sonarqubeKey }}
     
@@ -63,7 +63,7 @@ spec:
         title: "Sonarqube project property file"
         branchName: "Sonarqube_project_properties"
         description: "Create sonar project properties file"
-        sourcePath: ./
+        sourcePath: ./test
         targetPath: ./
 
 
