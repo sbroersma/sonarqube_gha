@@ -52,7 +52,7 @@ spec:
       name: Delete sonarqube_workflow.yml
       action: fs:delete
       input:
-        files: ./sonarqube_workflow.yml
+        files: [./sonarqube_workflow.yml]
         
         
     - id: create_file
