@@ -46,6 +46,14 @@ spec:
           "Create files to create GitHub Action for Sonarqube Scan" #${{ parameters.description if parameters.description }}
         sourcePath: ./
         targetPath: ./.github/workflows/ #${{ parameters.targetPath if parameters.targetPath else parameters.branchName }}
+        
+    - id: remove_file
+      name: Remove workflow file from directory
+      uses: actions/github-script@v6
+      with:
+        script: console.log(context)
+        
+      
 
     - id: create_file
       name: Create Sonarqube project properties file
