@@ -48,7 +48,13 @@ spec:
         targetPath: ./.github/workflows/ #${{ parameters.targetPath if parameters.targetPath else parameters.branchName }}
         
       
-
+    - id: delete_file
+      name: Delete sonarqube_workflow.yml
+      action: fs:delete
+      input:
+        files: ./sonarqube_workflow.yml
+        
+        
     - id: create_file
       name: Create Sonarqube project properties file
       action: catalog:write
